@@ -12,6 +12,13 @@ html, body {
 	height: 100%;
 }
 
+.logo {
+	background-image: url(img/logo.png);
+	margin-top: 63px;
+	width: 185px;
+	height: 22px;
+	float: left;
+
 .clr {
 	height: 384px;
 }
