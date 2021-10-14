@@ -12,13 +12,13 @@
 </div>
 
 <div class="location">
-{% for location in locations %}
+    {% for location in locations %}
     <div class="location-1">
         <i class="fa fa-map-marker fa-5x"></i>
         <h4>{{ location.city|title }}</h4>
         <div class="contacts">
             <h5>Телефон</h5>
-            <p>{{ location.phone }}</p>
+            <p>+{{ location.phone }}</p>
         </div>
         <div class="contacts">
             <h5>Email</h5>
@@ -29,7 +29,7 @@
             <p>{{ location.address }}</p>
         </div>
     </div>
-{% endfor %}
+    {% endfor %}
 </div>
 
 {% endblock %}

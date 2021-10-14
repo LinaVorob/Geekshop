@@ -1,6 +1,8 @@
 from django.shortcuts import render
 import json
 
+from mainapp.models import Product, Contacts
+
 
 def main(request):
     title = 'Магазин'
@@ -8,9 +10,12 @@ def main(request):
     with open("geekshop/menu.json", "r") as read_file:
         links_menu = json.load(read_file)
 
+    products = Product.objects.all()[:4]
+
     context = {
         'title': title,
         'links_menu': links_menu,
+        'products': products,
     }
 
     return render(request, 'geekshop/index.html', context=context)
@@ -22,8 +27,9 @@ def contacts(request):
     with open("geekshop/menu.json", "r") as read_file:
         links_menu = json.load(read_file)
 
-    with open("geekshop/locations.json", "r") as read_file:
-        locations = json.load(read_file)
+    locations = Contacts.objects.all()
+    for location in locations:
+        print(location.phone)
 
     context = {
         'title': title,
