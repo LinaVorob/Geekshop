@@ -1,0 +1,20 @@
+[
+  {
+    "city": "Москва",
+    "phone": 78888888888,
+    "email": "info@geekshop.ru",
+    "address": "В пределах МКАД"
+  },
+  {
+    "city": "Санкт-Петербург",
+    "phone": 79998888888,
+    "email": "spb.info@geekshop.ru",
+    "address": "Стрелка Васильевского острова, линия 11."
+  },
+  {
+    "city": "Казань",
+    "phone": 79999999999,
+    "email": "kzn.info@geekshop.ru",
+    "address": "ул. Карла Маркса"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Стулья",
+    "description": "Четырехногая мебель для одного"
+  },
+  {
+    "name": "Столы",
+    "description": ""
+  },
+  {
+    "name": "Офис",
+    "description": ""
+  },
+  {
+    "name": "Классика",
+    "description": ""
+  },
+  {
+    "name": "Модерн",
+    "description": ""
+  },
+  {
+    "name": "Дом",
+    "description": ""
+  }
+]

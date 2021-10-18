@@ -1,0 +1,47 @@
+[
+  {
+    "category": "Стулья",
+    "name": "NameChair",
+    "image": "products_images/NameChair_Ae2G7UU.jpg",
+    "short_desc": "Какой-то стул",
+    "description": "Какой-то стул, на котором можно сидеть долго.",
+    "price": "2000.00",
+    "quantity": 20
+  },
+  {
+    "category": "Столы",
+    "name": "NewWorkTable",
+    "image": "products_images/slider-hotdeal_0nyqy2N.jpg",
+    "short_desc": "Стол круглый",
+    "description": "Абсолютно неудобный для работы стол",
+    "price": "5000.00",
+    "quantity": 13
+  },
+  {
+    "category": "Офис",
+    "name": "CoolClock",
+    "image": "products_images/product-4-sm.jpg",
+    "short_desc": "Серые часы",
+    "description": "Всегда показывают неверное время. Единственное их постоянство.",
+    "price": "4738.00",
+    "quantity": 50
+  },
+  {
+    "category": "Классика",
+    "name": "LampForYou",
+    "image": "products_images/product-31.jpg",
+    "short_desc": "цилиндрическая лампа",
+    "description": "Просто лампа. Вечная классика.",
+    "price": "2030.00",
+    "quantity": 30
+  },
+  {
+    "category": "Модерн",
+    "name": "RoundLamp",
+    "image": "products_images/product-1.jpg",
+    "short_desc": "Круглая лампа",
+    "description": "Белая круглая маленькая лампа",
+    "price": "900.00",
+    "quantity": 79
+  }
+]

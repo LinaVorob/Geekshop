@@ -62,6 +62,13 @@ class Product(models.Model):
         verbose_name='количество на складе',
         default=0,
     )
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    updated = models.DateTimeField(
+        auto_now=True,
+    )
 
     def __str__(self):
         return f'{self.name} ({self.category.name})'
@@ -74,6 +81,7 @@ class Product(models.Model):
             output_size = (270, 270)
             img.thumbnail(output_size)
             img.save(self.image.path)
+
 
 class Contacts(models.Model):
     city = models.CharField(
