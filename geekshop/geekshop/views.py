@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import json
 
+from basketapp.models import Basket
 from mainapp.models import Product, Contacts
 
 
@@ -11,11 +12,13 @@ def main(request):
         links_menu = json.load(read_file)
 
     products = Product.objects.all()[:4]
+    basket = Basket.objects.filter(user=request.user)
 
     context = {
         'title': title,
         'links_menu': links_menu,
         'products': products,
+        'basket': basket,
     }
 
     return render(request, 'geekshop/index.html', context=context)
@@ -23,6 +26,8 @@ def main(request):
 
 def contacts(request):
     title = 'Контакты'
+    basket = Basket.objects.filter(user=request.user)
+
 
     with open("geekshop/menu.json", "r") as read_file:
         links_menu = json.load(read_file)
@@ -35,6 +40,7 @@ def contacts(request):
         'title': title,
         'links_menu': links_menu,
         'locations': locations,
+        'basket': basket,
     }
 
     return render(request, 'geekshop/contact.html', context=context)

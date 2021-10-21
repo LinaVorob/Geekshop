@@ -10,6 +10,14 @@
                 {{ user.first_name|default:'Пользователь' }}
             </a>
         </li>
+        {% if basket %}
+            <li><a href="{% url 'basket:view' %}">Корзина</a>
+                <span>
+                    ({{ basket|length }} шт.)
+                </span>
+            </li>
+
+        {% endif %}
     {% endif %}
         <li>
             {% if user.is_authenticated %}
