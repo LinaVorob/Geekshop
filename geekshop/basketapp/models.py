@@ -30,3 +30,18 @@ class Basket(models.Model):
     def __str__(self):
         return f'{self.user} ({self.product})'
 
+    @property
+    def product_cost(self):
+        return self.product.price * self.quantity
+
+    @property
+    def total_quantity(self):
+        _item = Basket.objects.filter(user=self.user)
+        _total_quantity = sum(list(map(lambda x: x.quantity, _item)))
+        return _total_quantity
+
+    @property
+    def total_cost(self):
+        _item = Basket.objects.filter(user=self.user)
+        _total_cost = sum(list(map(lambda x: x.product_cost, _item)))
+        return _total_cost

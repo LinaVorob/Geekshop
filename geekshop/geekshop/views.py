@@ -10,9 +10,10 @@ def main(request):
 
     with open("geekshop/menu.json", "r") as read_file:
         links_menu = json.load(read_file)
-
+    basket = []
     products = Product.objects.all()[:4]
-    basket = Basket.objects.filter(user=request.user)
+    if request.user.is_authenticated:
+        basket = Basket.objects.filter(user=request.user)
 
     context = {
         'title': title,

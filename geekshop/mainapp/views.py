@@ -1,4 +1,5 @@
 import json
+import random
 
 from django.shortcuts import render, get_object_or_404
 
@@ -6,8 +7,22 @@ from basketapp.models import Basket
 from mainapp.models import ProductCategory, Product
 
 
-def something(request):
-    print(request.user)
+def get_basket(user):
+    if user.is_authenticated:
+        return Basket.objects.filter(user=user)
+    else:
+        return []
+
+
+def get_hot_product():
+    products = Product.objects.all()
+    return random.sample(list(products), 1)[0]
+
+
+def get_same_products(hot_product):
+    same_products = Product.objects.filter(category=hot_product.category).exclude(pk=hot_product.pk)[:3]
+    return same_products
+
 
 def products(request, pk=None):
     title = 'Каталог'
@@ -17,8 +32,7 @@ def products(request, pk=None):
     for product in products:
         if product.category not in links_catalog:
             links_catalog += ProductCategory.objects.filter(name=product.category)
-    basket = Basket.objects.filter(user=request.user)
-
+    basket = get_basket(request.user)
 
     with open("mainapp/menu.json", "r") as read_file:
         links_menu = json.load(read_file)
@@ -40,12 +54,14 @@ def products(request, pk=None):
         }
 
         return render(request, 'mainapp/products.html', context=context)
-    same_products = Product.objects.all()[1:3]
+    hot_product = get_hot_product()
+    same_products = get_same_products(hot_product)
 
     context = {
         'title': title,
         'links_catalog': links_catalog,
         'links_menu': links_menu,
+        'hot_product': hot_product,
         'same_products': same_products,
         'products': products,
         'basket': basket,
@@ -53,4 +69,17 @@ def products(request, pk=None):
 
     return render(request, 'mainapp/products.html', context=context)
 
-#Разбить на 2 вьюхи, только те категории, товары с которыми есть
+
+def product(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    with open("mainapp/menu.json", "r") as read_file:
+        links_menu = json.load(read_file)
+    context = {
+        'title': product.name,
+        'links_menu': links_menu,
+        'links_catalog': ProductCategory.objects.all(),
+        'product': product,
+        'same_products': get_same_products(product),
+        'basket': get_basket(request.user),
+    }
+    return render(request, 'mainapp/product.html', context)
