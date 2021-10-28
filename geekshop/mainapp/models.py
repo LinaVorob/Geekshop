@@ -22,8 +22,14 @@ class ProductCategory(models.Model):
         auto_now=True,
     )
 
+    is_active = models.BooleanField(verbose_name='активна', default=True)
+
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории товаров'
 
 
 class Product(models.Model):
@@ -70,6 +76,8 @@ class Product(models.Model):
         auto_now=True,
     )
 
+    is_active = models.BooleanField(verbose_name='активный', default=True)
+
     def __str__(self):
         return f'{self.name} ({self.category.name})'
 
@@ -81,6 +89,10 @@ class Product(models.Model):
             output_size = (270, 270)
             img.thumbnail(output_size)
             img.save(self.image.path)
+
+    class Meta:
+        verbose_name = 'товар'
+        verbose_name_plural = 'товары'
 
 
 class Contacts(models.Model):
@@ -108,3 +120,7 @@ class Contacts(models.Model):
 
     def __str__(self):
         return self.city
+
+    class Meta:
+        verbose_name = 'Контакт'
+        verbose_name_plural = 'контакты'

@@ -27,6 +27,8 @@ class Basket(models.Model):
         verbose_name='время',
     )
 
+    is_active = models.BooleanField(verbose_name='активна', default=True)
+
     def __str__(self):
         return f'{self.user} ({self.product})'
 

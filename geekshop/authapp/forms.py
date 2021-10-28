@@ -49,10 +49,14 @@ class ShopUserEditForm(UserChangeForm):
     def __init__(self, *args, **kwargs):
         super(ShopUserEditForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
-            field.help_text = ''
-            if field_name == 'password':
-                field.widget = forms.HiddenInput()
+            if field_name == 'is_active' or field_name == 'is_superuser' or field_name == 'is_staff':
+                field.widget.attrs['class'] = "form-check-input"
+                field.widget.attrs['type'] = "checkbox"
+            else:
+                field.widget.attrs['class'] = 'form-control'
+                field.help_text = ''
+                if field_name == 'password':
+                    field.widget = forms.HiddenInput()
 
     def clean_age(self):
         data = self.cleaned_data['age']
@@ -65,4 +69,3 @@ class ShopUserEditForm(UserChangeForm):
         if re.fullmatch(r'[^а-яА-я]+', data) is None:
             raise forms.ValidationError('Только латиница!')
         return data
-

@@ -72,12 +72,18 @@ def products(request, pk=None):
 
 def product(request, pk):
     product = get_object_or_404(Product, pk=pk)
+    links_catalog = []
+    products = Product.objects.all().order_by('price')
+    for item in products:
+        if item.category not in links_catalog:
+            links_catalog += ProductCategory.objects.filter(name=item.category)
+    basket = get_basket(request.user)
     with open("mainapp/menu.json", "r") as read_file:
         links_menu = json.load(read_file)
     context = {
         'title': product.name,
         'links_menu': links_menu,
-        'links_catalog': ProductCategory.objects.all(),
+        'links_catalog': links_catalog,
         'product': product,
         'same_products': get_same_products(product),
         'basket': get_basket(request.user),
