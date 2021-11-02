@@ -1,26 +1,37 @@
 [
   {
     "name": "Стулья",
-    "description": "Четырехногая мебель для одного"
+    "description": "Четырехногая мебель для одного",
+    "is_active": true
   },
   {
     "name": "Столы",
-    "description": ""
+    "description": "Дополнительная поверхность в вашем доме.",
+    "is_active": true
   },
   {
     "name": "Офис",
-    "description": ""
+    "description": "",
+    "is_active": true
   },
   {
     "name": "Классика",
-    "description": ""
+    "description": "",
+    "is_active": true
   },
   {
     "name": "Модерн",
-    "description": ""
+    "description": "",
+    "is_active": true
   },
   {
     "name": "Дом",
-    "description": ""
+    "description": "",
+    "is_active": true
+  },
+  {
+    "name": "Умная техника",
+    "description": "Без хозяина решает, что необходимо сделать дома.",
+    "is_active": false
   }
 ]

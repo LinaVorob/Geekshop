@@ -1,57 +1,61 @@
 {% extends 'adminapp/base.html' %}
 {% load static %}
-{% load my_tags %}
+
 {% block content %}
     <main>
         <div class="container-fluid">
-            <h1 class="mt-4">Продукты</h1>
+            <h1 class="mt-4">Товары</h1>
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-table mr-1"></i>
-                    Продукты
+                    Товары
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th>Название</th>
-                                <th>Описание</th>
-                                <th>Товары</th>
-                                <th>Создано</th>
-                                <th>Обновлено</th>
+                                <th>Наименование</th>
+                                <th>Количество</th>
+                                <th>Цена</th>
+                                <th>Детали</th>
                                 <th>Активный</th>
+                                <th>Редактировать</th>
                                 <th>Удалить</th>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
-                                <th>Название</th>
-                                <th>Описание</th>
-                                <th>Товары</th>
-                                <th>Создано</th>
-                                <th>Обновлено</th>
+                                <th>Наименование</th>
+                                <th>Количество</th>
+                                <th>Цена</th>
+                                <th>Детали</th>
                                 <th>Активный</th>
+                                <th>Редактировать</th>
                                 <th>Удалить</th>
                             </tr>
                             </tfoot>
                             <tbody>
-                            {% for category in objects %}
-                                <tr {% if not category.is_active %} style="opacity: 0.5;" {% endif %}>
-                                    <td><a href="{% url 'admin_staff:category_update' category.pk %}" style="color: dodgerblue">{{ category.name }}</a></td>
-                                    <td>{{ category.description|description_folder }}</td>
-                                    <td><a href="{% url 'admin_staff:products' category.pk %}">Товары</a> </td>
-                                    <td>{{ category.created }}</td>
-                                    <td>{{ category.updated }}</td>
+                            {% for product in objects %}
+                                <tr {% if not product.is_active %} style="opacity: 0.5;" {% endif %}>
+                                    <td>{{ product.name }}</td>
+                                    <td>{{ product.quantity }}</td>
+                                    <td>{{ product.price }}</td>
                                     <td class="text-center">
-                                        {% if category.is_active %}
+                                        <a href="{% url 'admin_staff:product_read' product.pk %}">Detail</a>
+                                    </td>
+                                    <td class="text-center">
+                                        {% if product.is_active %}
                                             <i class="fa fa-check-circle"></i>
                                         {% else %}
                                             <i class="fa fa-times-circle"></i>
                                         {% endif %}
                                     </td>
+                                    <td class="text-center">
+                                        <a href="{% url 'admin_staff:product_update' product.pk %}">Edit</a>
+                                    </td>
                                     <td>
-                                        <a {% if not category.is_active %} class="invisible" {% endif %} href="{% url 'admin_staff:category_delete' pk=category.pk %}">
+                                        <a {% if not product.is_active %} class="invisible" {% endif %} href="{% url 'admin_staff:product_delete' product.pk %}">
                                             <i class="fa fa-times-circle"></i>
                                         </a>
                                     </td>
@@ -62,8 +66,8 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="{% url 'adminapp:category_create' %}">
-                        <button class="btn btn-success">Добавить категорию</button>
+                    <a href="{% url 'admin_staff:product_create' category.pk %}">
+                        <button class="btn btn-success">Добавить товар</button>
                     </a>
                 </div>
             </div>

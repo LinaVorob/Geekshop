@@ -6,7 +6,8 @@
     "short_desc": "Какой-то стул",
     "description": "Какой-то стул, на котором можно сидеть долго.",
     "price": "2000.00",
-    "quantity": 20
+    "quantity": 20,
+    "is_active": true
   },
   {
     "category": "Столы",
@@ -15,7 +16,8 @@
     "short_desc": "Стол круглый",
     "description": "Абсолютно неудобный для работы стол",
     "price": "5000.00",
-    "quantity": 13
+    "quantity": 13,
+    "is_active": true
   },
   {
     "category": "Офис",
@@ -24,7 +26,8 @@
     "short_desc": "Серые часы",
     "description": "Всегда показывают неверное время. Единственное их постоянство.",
     "price": "4738.00",
-    "quantity": 50
+    "quantity": 50,
+    "is_active": true
   },
   {
     "category": "Классика",
@@ -33,7 +36,8 @@
     "short_desc": "цилиндрическая лампа",
     "description": "Просто лампа. Вечная классика.",
     "price": "2030.00",
-    "quantity": 30
+    "quantity": 30,
+    "is_active": true
   },
   {
     "category": "Модерн",
@@ -42,6 +46,27 @@
     "short_desc": "Круглая лампа",
     "description": "Белая круглая маленькая лампа",
     "price": "900.00",
-    "quantity": 79
+    "quantity": 79,
+    "is_active": true
+  },
+  {
+    "category": "Классика",
+    "name": "OldBox",
+    "image": "products_images/OldBox_iFxv2Uy.png",
+    "short_desc": "Антиквариат",
+    "description": "Старый классический комод. Антиквариатный в английском стиле.",
+    "price": "250000.00",
+    "quantity": 2,
+    "is_active": true
+  },
+  {
+    "category": "Дом",
+    "name": "FashionSlippers",
+    "image": "products_images/300x400.jpg",
+    "short_desc": "Очень модные тапочки",
+    "description": "Последний писк моды в обувной индустрии. Высокий комфорт и тепло в вашем доме.",
+    "price": "300.00",
+    "quantity": 254,
+    "is_active": false
   }
 ]
