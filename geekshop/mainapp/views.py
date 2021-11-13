@@ -8,12 +8,6 @@ from basketapp.models import Basket
 from mainapp.models import ProductCategory, Product
 
 
-def get_basket(user):
-    if user.is_authenticated:
-        return Basket.objects.filter(user=user)
-    else:
-        return []
-
 
 def get_hot_product():
     products = Product.objects.filter(is_active=True)
@@ -33,7 +27,6 @@ def products(request, pk=None, page=1):
     for product in products:
         if product.category not in links_catalog:
             links_catalog += ProductCategory.objects.filter(name=product.category)
-    basket = get_basket(request.user)
 
     with open("mainapp/menu.json", "r") as read_file:
         links_menu = json.load(read_file)
@@ -58,7 +51,6 @@ def products(request, pk=None, page=1):
             'links_menu': links_menu,
             'category': category,
             'products': products_paginator,
-            'basket': basket,
         }
 
         return render(request, 'mainapp/products.html', context=context)
@@ -72,7 +64,6 @@ def products(request, pk=None, page=1):
         'hot_product': hot_product,
         'same_products': same_products,
         'products': products,
-        'basket': basket,
     }
 
     return render(request, 'mainapp/products.html', context=context)
@@ -85,7 +76,6 @@ def product(request, pk):
     for item in products:
         if item.category not in links_catalog:
             links_catalog += ProductCategory.objects.filter(name=item.category)
-    basket = get_basket(request.user)
     with open("mainapp/menu.json", "r") as read_file:
         links_menu = json.load(read_file)
     context = {
@@ -94,6 +84,5 @@ def product(request, pk):
         'links_catalog': links_catalog,
         'product': product,
         'same_products': get_same_products(product),
-        'basket': get_basket(request.user),
     }
     return render(request, 'mainapp/product.html', context)
