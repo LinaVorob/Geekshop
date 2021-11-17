@@ -22,7 +22,7 @@ def media_folder_users(string):
     users_avatars/user1.jpg --> /media/users_avatars/user1.jpg
     """
     if not string:
-        string = 'users_avatars/default.jpg'
+        string = 'users_avatars/placeholder.png'
 
     return f'{settings.MEDIA_URL}{string}'
 
@@ -38,3 +38,4 @@ def description_folder(string):
 
 
 register.filter('media_folder_products', media_folder_products)
+

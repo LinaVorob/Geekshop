@@ -1,6 +1,6 @@
 {% extends 'geekshop/base.html' %}
 {% load static %}
-{% load my_tags %}
+{% load new_tags %}
 {% block content %}
     <div class="hero">
         <div class="header clearfix">
@@ -19,7 +19,7 @@
                 <h4>{{ location.city|title }}</h4>
                 <div class="contacts">
                     <h5>Телефон</h5>
-                    <p>{{ location.phone }}</p>
+                    <p>{{ location.phone|phone_form }}</p>
                 </div>
                 <div class="contacts">
                     <h5>Email</h5>
