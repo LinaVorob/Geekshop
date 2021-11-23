@@ -1,4 +1,4 @@
-{% extends geekshop/base.html' %}
+{% extends 'geekshop/base.html' %}
 {% load static %}
 {% load my_tags %}
 
@@ -12,12 +12,12 @@
                     {{ item.product.category.name }}
                 </span>
                 <span class="product_name"> {{ item.product.name }}</span>
-                <span class="product_price"> {{ item.product.price }}&nbsруб.</span>
+                <span class="product_price"> {{ item.product.price }}&nbspруб.</span>
                 <span class="product_quantity">
                     x {{ item.quantity }} шт.
                 </span>
                 <span class="product_cost">
-                    = {{ item.get_product_cost }}&nbsруб.
+                    = {{ item.get_product_cost }}&nbspруб.
                 </span>
             </div>
         {% endfor %}

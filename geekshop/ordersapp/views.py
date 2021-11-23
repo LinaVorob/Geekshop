@@ -36,14 +36,14 @@ class OrderItemCreate(CreateView):
                 for num, form in enumerate(formset.forms):
                     form.initial['product'] = basket_items[num].product
                     form.initial['quantity'] = basket_items[num].quantity
-                    form.initial['user'] = basket_items[num].user
+
                 basket_items.delete()
             else:
                 formset = OrderFormSet()
         data['orderitems'] = formset
         return data
 
-    def form_validation(self, form):
+    def form_valid(self, form):
         context = self.get_context_data()
         orderitems = context['orderitems']
 
@@ -54,7 +54,7 @@ class OrderItemCreate(CreateView):
                 orderitems.instance = self.object
                 orderitems.save()
 
-        if self.object.get_total_cost == 0:
+        if self.object.get_total_cost() == 0:
             self.object.delete()
         return super(self.__class__, self).form_valid(form)
 
@@ -100,7 +100,7 @@ class OrderItemUpdate(UpdateView):
         data['orderitems'] = formset
         return data
 
-    def form_validation(self, form):
+    def form_valid(self, form):
         context = self.get_context_data()
         orderitems = context['orderitems']
 
@@ -111,6 +111,6 @@ class OrderItemUpdate(UpdateView):
                 orderitems.instance = self.object
                 orderitems.save()
 
-        if self.object.get_total_cost == 0:
+        if self.object.get_total_cost() == 0:
             self.object.delete()
         return super(self.__class__, self).form_valid(form)

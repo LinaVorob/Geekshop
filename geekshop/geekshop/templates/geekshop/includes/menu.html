@@ -24,6 +24,11 @@
                             ({{ basket.0.total_quantity|floatformat:0 }} шт.)
                         </span></li>
                 {% endif %}
+                <li>
+                    <a class="dropdown-item" href="{% url 'orders:main' %}">
+                        Заказы
+                    </a>
+                </li>
             </ul>
 
 
