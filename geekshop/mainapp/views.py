@@ -23,7 +23,7 @@ def products(request, pk=None, page=1):
     title = 'Каталог'
 
     links_catalog = []
-    products = Product.objects.filter(is_active=True).order_by('price')
+    products = Product.objects.filter(is_active=True, quantity__gte=1).order_by('price')
     for product in products:
         if product.category not in links_catalog:
             links_catalog += ProductCategory.objects.filter(name=product.category)
@@ -34,10 +34,10 @@ def products(request, pk=None, page=1):
     if pk is not None:
         if pk == 0:
             category = {'pk': 0, 'name': 'все'}
-            products = Product.objects.filter(is_active=True, category__is_active=True).order_by('price')
+            products = Product.objects.filter(is_active=True, category__is_active=True, quantity__gte=1).order_by('price')
         else:
             category = get_object_or_404(ProductCategory, pk=pk)
-            products = Product.objects.filter(category__pk=pk, is_active=True, category__is_active=True).order_by('price')
+            products = Product.objects.filter(category__pk=pk, is_active=True, category__is_active=True, quantity__gte=1).order_by('price')
         paginator = Paginator(products, 2)
         try:
             products_paginator = paginator.page(page)
