@@ -27,7 +27,7 @@ class Command(BaseCommand):
         ShopUser.objects.all().delete()
         super_user = ShopUser.objects.create_superuser('admin', 'admin@geekshop.local', 'qwerty', age=25)
         for user in users:
-            new_user = ProductCategory(**user)
+            new_user = ShopUser(**user)
             new_user.save()
 
         products = load_from_json('products')
