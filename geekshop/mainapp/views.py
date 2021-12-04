@@ -28,7 +28,7 @@ def products(request, pk=None, page=1):
         if product.category not in links_catalog:
             links_catalog += ProductCategory.objects.filter(name=product.category)
 
-    with open("mainapp/menu.json", "r") as read_file:
+    with open("mainapp/menu.json", "r", encoding='utf-8') as read_file:
         links_menu = json.load(read_file)
 
     if pk is not None:
