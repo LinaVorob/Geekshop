@@ -20,10 +20,12 @@ class OrderList(ListView):
         return Order.objects.filter(user=self.request.user)
 
 
+
 class OrderItemCreate(CreateView):
     model = Order
     fields = []
     success_url = reverse_lazy('orders:main')
+
 
     def get_context_data(self, **kwargs):
         data = super(OrderItemCreate, self).get_context_data(**kwargs)

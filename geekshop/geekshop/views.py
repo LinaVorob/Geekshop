@@ -7,9 +7,9 @@ from mainapp.models import Product, Contacts
 def main(request):
     title = 'Магазин'
 
-    with open("geekshop/menu.json", "r") as read_file:
+    with open("geekshop/menu.json", "r", encoding='utf-8') as read_file:
         links_menu = json.load(read_file)
-    products = Product.objects.all()[:4]
+    products = Product.objects.filter(is_active=True, category__is_active=True).select_related('category')[:4]
 
     context = {
         'title': title,
@@ -24,7 +24,7 @@ def contacts(request):
     title = 'Контакты'
 
 
-    with open("geekshop/menu.json", "r") as read_file:
+    with open("geekshop/menu.json", "r", encoding='utf-8') as read_file:
         links_menu = json.load(read_file)
 
     locations = Contacts.objects.all()
