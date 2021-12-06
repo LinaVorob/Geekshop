@@ -9,7 +9,7 @@ def main(request):
 
     with open("geekshop/menu.json", "r", encoding='utf-8') as read_file:
         links_menu = json.load(read_file)
-    products = Product.objects.all()[:4]
+    products = Product.objects.filter(is_active=True, category__is_active=True).select_related('category')[:4]
 
     context = {
         'title': title,
