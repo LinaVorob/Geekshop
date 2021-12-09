@@ -1,6 +1,6 @@
 from django.shortcuts import render
 import json
-
+from django.views.decorators.cache import cache_page
 from mainapp.models import Product, Contacts
 
 
@@ -20,9 +20,9 @@ def main(request):
     return render(request, 'geekshop/index.html', context=context)
 
 
+@cache_page(3600)
 def contacts(request):
     title = 'Контакты'
-
 
     with open("geekshop/menu.json", "r", encoding='utf-8') as read_file:
         links_menu = json.load(read_file)
