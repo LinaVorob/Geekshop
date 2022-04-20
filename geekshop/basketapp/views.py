@@ -8,14 +8,15 @@ from django.urls import reverse
 
 from basketapp.models import Basket
 from mainapp.models import Product
+from django.db.models import F, Q
 
 
 @login_required
 def basket(request):
-    with open("mainapp/menu.json", "r") as read_file:
+    with open("mainapp/menu.json", "r", encoding='utf-8') as read_file:
         links_menu = json.load(read_file)
 
-    basket = Basket.objects.filter(user=request.user)
+    basket = Basket.objects.select_related('user').filter(user=request.user)
 
     context = {
         'basket': basket,
@@ -29,13 +30,12 @@ def basket_add(request, pk):
     product = get_object_or_404(Product, pk=pk)
     if 'login' in request.META.get('HTTP_REFERER'):
         return HttpResponseRedirect(reverse('products:detail', args=[pk]))
-    basket = Basket.objects.filter(user=request.user, product=product).first()
+    basket = Basket.objects.select_related('product').filter(user=request.user, product=product).first()
 
     if not basket:
         basket = Basket(user=request.user, product=product)
 
-    basket.quantity += 1
-    basket.save()
+    basket.quantity = F('quantity') + 1
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 

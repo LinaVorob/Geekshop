@@ -4,7 +4,6 @@ import random
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
 
-from basketapp.models import Basket
 from mainapp.models import ProductCategory, Product
 
 
@@ -23,12 +22,12 @@ def products(request, pk=None, page=1):
     title = 'Каталог'
 
     links_catalog = []
-    products = Product.objects.filter(is_active=True, quantity__gte=1).order_by('price')
+    products = Product.objects.select_related('category').filter(is_active=True, quantity__gte=1).order_by('price')
     for product in products:
         if product.category not in links_catalog:
             links_catalog += ProductCategory.objects.filter(name=product.category)
 
-    with open("mainapp/menu.json", "r") as read_file:
+    with open("mainapp/menu.json", "r", encoding='utf-8') as read_file:
         links_menu = json.load(read_file)
 
     if pk is not None:
@@ -76,7 +75,7 @@ def product(request, pk):
     for item in products:
         if item.category not in links_catalog:
             links_catalog += ProductCategory.objects.filter(name=item.category)
-    with open("mainapp/menu.json", "r") as read_file:
+    with open("mainapp/menu.json", "r", encoding='utf-8') as read_file:
         links_menu = json.load(read_file)
     context = {
         'title': product.name,

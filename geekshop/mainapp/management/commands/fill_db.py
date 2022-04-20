@@ -22,13 +22,10 @@ class Command(BaseCommand):
             new_category = ProductCategory(**category)
             new_category.save()
 
-        users = load_from_json('users')
 
         ShopUser.objects.all().delete()
         super_user = ShopUser.objects.create_superuser('admin', 'admin@geekshop.local', 'qwerty', age=25)
-        for user in users:
-            new_user = ShopUser(**user)
-            new_user.save()
+
 
         products = load_from_json('products')
         Product.objects.all().delete()
@@ -45,11 +42,7 @@ class Command(BaseCommand):
             new_contact = Contacts(**contact)
             new_contact.save()
 
-        baskets = load_from_json('baskets')
         Basket.objects.all().delete()
-        for basket in baskets:
-            new_basket = Contacts(**basket)
-            new_basket.save()
 
         if super_user:
             print('БД готова')
